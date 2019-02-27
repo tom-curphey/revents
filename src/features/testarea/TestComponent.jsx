@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon } from 'semantic-ui-react';
-import GoogleMapReact from 'google-map-react';
+import { Button } from 'semantic-ui-react';
+// import GoogleMapReact from 'google-map-react';
 import Script from 'react-load-script';
 import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng
 } from 'react-places-autocomplete';
 import { incrementCounter, decrementCounter } from './TestActions';
+import { openModal } from '../modals/modalActions';
 
 const mapState = (state) => ({
 	data: state.test.data
@@ -15,10 +16,11 @@ const mapState = (state) => ({
 
 const actions = {
 	incrementCounter,
-	decrementCounter
+	decrementCounter,
+	openModal
 };
 
-const Marker = () => <Icon name="marker" size="big" color="red" />;
+// const Marker = () => <Icon name="marker" size="big" color="red" />;
 
 class TestComponent extends Component {
 	static defaultProps = {
@@ -58,7 +60,8 @@ class TestComponent extends Component {
 		const {
 			incrementCounter,
 			decrementCounter,
-			data
+			data,
+			openModal
 		} = this.props;
 		return (
 			<div>
@@ -78,6 +81,12 @@ class TestComponent extends Component {
 					color="red"
 					content="Decrement"
 				/>
+				<Button
+					onClick={() =>
+						openModal('TestModal', { data: 43 })}
+					color="teal"
+					content="Open Modal"
+				/>
 				<br />
 				<br />
 				<form onSubmit={this.handleFormSubmit}>
@@ -86,7 +95,7 @@ class TestComponent extends Component {
 					)}
 					<button type="submit">Submit</button>
 				</form>
-				<div style={{ height: '300px', width: '100%' }}>
+				{/* <div style={{ height: '300px', width: '100%' }}>
 					<GoogleMapReact
 						bootstrapURLKeys={{
 							key:
@@ -101,7 +110,7 @@ class TestComponent extends Component {
 							text="My Marker"
 						/>
 					</GoogleMapReact>
-				</div>
+				</div> */}
 			</div>
 		);
 	}
