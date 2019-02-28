@@ -7,16 +7,17 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng
 } from 'react-places-autocomplete';
-import { incrementCounter, decrementCounter } from './TestActions';
+import { incrementAsync, decrementAsync } from './TestActions';
 import { openModal } from '../modals/modalActions';
 
 const mapState = (state) => ({
-	data: state.test.data
+	data: state.test.data,
+	loading: state.test.loading
 });
 
 const actions = {
-	incrementCounter,
-	decrementCounter,
+	incrementAsync,
+	decrementAsync,
 	openModal
 };
 
@@ -58,10 +59,11 @@ class TestComponent extends Component {
 		};
 
 		const {
-			incrementCounter,
-			decrementCounter,
+			incrementAsync,
+			decrementAsync,
 			data,
-			openModal
+			openModal,
+			loading
 		} = this.props;
 		return (
 			<div>
@@ -72,14 +74,16 @@ class TestComponent extends Component {
 				<h1>Test Area</h1>
 				<h3>The answer is: {data}</h3>
 				<Button
-					onClick={incrementCounter}
+					onClick={incrementAsync}
 					color="green"
 					content="Increment"
+					loading={loading}
 				/>
 				<Button
-					onClick={decrementCounter}
+					onClick={decrementAsync}
 					color="red"
 					content="Decrement"
+					loading={loading}
 				/>
 				<Button
 					onClick={() =>
