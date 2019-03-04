@@ -63,6 +63,8 @@ export const registerUser = (user) => async (
 		console.log(createdUser);
 
 		// Update the auth profile
+		// This is a different function that is different to the one being used in userActions
+		// THis updates out auth profile
 		await createdUser.updateProfile({
 			displayName: user.displayName
 		});

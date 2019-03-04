@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import SettingsNav from './SettingsNav';
 import { updatePassword } from '../../auth/authActions';
+import { updateProfile } from '../userActions';
 
 import BasicPage from './BasicPage';
 import AboutPage from './AboutPage';
@@ -11,13 +12,20 @@ import PhotosPage from './PhotosPage';
 import AccountPage from './AccountPage';
 
 const actions = {
-	updatePassword
+	updatePassword,
+	updateProfile
 };
 
 const mapState = (state) => ({
-	providerId: state.firebase.auth.providerData[0].providerId
+	providerId: state.firebase.auth.providerData[0].providerId,
+	user: state.firebase.profile
 });
-const SettingsDashboard = ({ updatePassword, providerId }) => {
+const SettingsDashboard = ({
+	updatePassword,
+	providerId,
+	user,
+	updateProfile
+}) => {
 	return (
 		<Grid>
 			<Grid.Column width={12}>
@@ -29,11 +37,22 @@ const SettingsDashboard = ({ updatePassword, providerId }) => {
 					/>
 					<Route
 						path="/settings/basic"
-						component={BasicPage}
+						// Data needs to be passed in as initialValues as the data is going to be used in a redux Form
+						render={() => (
+							<BasicPage
+								initialValues={user}
+								updateProfile={updateProfile}
+							/>
+						)}
 					/>
 					<Route
 						path="/settings/about"
-						component={AboutPage}
+						render={() => (
+							<AboutPage
+								initialValues={user}
+								updateProfile={updateProfile}
+							/>
+						)}
 					/>
 					<Route
 						path="/settings/photos"
