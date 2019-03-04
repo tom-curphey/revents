@@ -52,7 +52,6 @@ export const updateEvent = (event) => {
 			toastr.error('Opps', 'Computer says no..');
 		}
 	};
-	return {};
 };
 
 export const deleteEvent = (eventId) => {

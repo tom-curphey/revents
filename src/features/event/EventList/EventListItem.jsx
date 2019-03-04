@@ -31,17 +31,26 @@ class EventListItem extends Component {
 				<Segment>
 					<span>
 						<Icon name="clock" />{' '}
-						{format(event.date, 'dddd Do MMMM')} at{' '}
-						{format(event.date, 'HH:mm')} |
+						{format(
+							event.date.toDate(),
+							'dddd Do MMMM'
+						)}{' '}
+						at {format(event.date.toDate(), 'HH:mm')} |
 						<Icon name="marker" /> {event.venue}
 					</span>
 				</Segment>
 				<Segment secondary>
 					<List horizontal>
 						{event.attendees &&
-							event.attendees.map((attendee) => (
+							// Object.values() -> Takes an object as a parameter and returns
+							// its values as an array so we can map through the array.
+							// A map function will only take an array as a parameter
+							// Add index as a parameter so you can make pass the index as the key -> This is a temporary shortcut
+							Object.values(
+								event.attendees
+							).map((attendee, index) => (
 								<EventListAttendee
-									key={attendee.id}
+									key={index}
 									attendee={attendee}
 								/>
 							))}
