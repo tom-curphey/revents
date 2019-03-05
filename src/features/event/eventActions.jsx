@@ -9,7 +9,7 @@ import {
 	asyncActionStart,
 	asyncActionFinish,
 	asyncActionError
-} from '../async/asyncAction';
+} from '../async/asyncActions';
 import { fetchSampleData } from '../../app/data/mockApi';
 
 export const fetchEvents = (events) => {
