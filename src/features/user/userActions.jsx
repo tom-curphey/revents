@@ -143,3 +143,16 @@ export const setMainPhoto = (photo) => async (
 		throw new Error('Problem setting main photo');
 	}
 };
+
+// export const getProfile = () => async (
+// 	dispatch,
+// 	getState,
+// 	{ getFirestore }
+// ) => {
+// 	const firestore = getFirestore();
+// 	try {
+// 		return await firestore.getProfile();
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
